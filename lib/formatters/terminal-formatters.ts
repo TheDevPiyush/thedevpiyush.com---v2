@@ -151,10 +151,10 @@ ${"=".repeat(20)}
       Features:
       ${project.features.map((f) => `✓ ${f}`).join("\n")}
 
-      Stats:
+      ${project?.stats ? `Stats:
       ${Object.entries(project.stats)
-          .map(([key, value]) => `${getStatIcon(key)} ${value}`)
-          .join("\n")}
+            .map(([key, value]) => `${getStatIcon(key)} ${value}`)
+            .join("\n")}` : ""}
 
       Links:
       🔗 ${project.links.github || "N/A"}
@@ -171,8 +171,10 @@ ${"=".repeat(20)}
         "Features:",
         ...project.features.map((f) => `✓ ${f}`),
         "",
-        "Stats:",
-        ...Object.entries(project.stats).map(([key, value]) => `${getStatIcon(key)} ${value}`),
+        ...(project?.stats ?
+          ["Stats:",
+            ...Object.entries(project.stats).map(([key, value]) => `${getStatIcon(key)} ${value}`)
+          ] : []),
         "",
         "Links:",
         `🔗 ${project.links.github || "N/A"}`,

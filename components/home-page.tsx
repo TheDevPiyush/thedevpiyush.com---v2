@@ -191,7 +191,7 @@ export function HomePage() {
                 <Card key={project.id} className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm overflow-hidden">
                   <div className="aspect-video relative bg-slate-700/50">
                     <Image
-                      src={project.image || "/placeholder.svg?height=300&width=500"}
+                      src={project.image_url || "/placeholder.svg?height=300&width=500"}
                       alt={project.title}
                       fill
                       className="object-cover"
@@ -245,9 +245,11 @@ export function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white">
-              View All Projects
-              <ArrowRight className="w-4 h-4 ml-2" />
+            <Button asChild variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white">
+              <Link href="/projects" className="flex items-center">
+                View All Projects
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -282,9 +284,11 @@ export function HomePage() {
                       </Badge>
                     ))}
                   </div>
-                  <Button variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto">
-                    Read more
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                  <Button asChild variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto">
+                    <Link href={`/blog/${post.id}`} className="flex items-center">
+                      Read more
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { usePortfolio } from "@/components/portfolio-provider"
 import { Loading, ErrorMessage } from "@/components/loading"
 import type { BlogPost } from "@/lib/data/portfolio"
+import Link from "next/link"
 
 interface Category {
   name: string
@@ -83,7 +84,7 @@ export default function BlogPage() {
                 <div className="grid lg:grid-cols-2 gap-0">
                   <div className="relative aspect-video lg:aspect-auto">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src={featuredPost.image_url || "/placeholder.svg?height=400&width=600"}
                       alt={featuredPost.title}
                       fill
                       className="object-cover"
@@ -127,9 +128,11 @@ export default function BlogPage() {
                             <span className="text-sm">{featuredPost.readTime}</span>
                           </div>
                         </div>
-                        <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
-                          Read Article
-                          <ArrowRight className="w-4 h-4 ml-2" />
+                        <Button asChild className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+                          <Link href={`/blog/${featuredPost.id}`} className="flex items-center">
+                            Read Article
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -139,28 +142,6 @@ export default function BlogPage() {
             </div>
           </section>
         )}
-
-        {/* Categories */}
-        {/* <section className="py-20 bg-slate-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Browse by Category</h2>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              {categories.map((category) => (
-                <Button
-                  key={category.name}
-                  variant="outline"
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
-                >
-                  <Tag className="w-4 h-4 mr-2" />
-                  {category.name} ({category.count})
-                </Button>
-              ))}
-            </div>
-          </div>
-        </section> */}
 
         {/* Blog Posts Grid */}
         <section className="py-20">
@@ -179,7 +160,7 @@ export default function BlogPage() {
                   <CardHeader className="p-0">
                     <div className="aspect-video relative overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=200&width=400"
+                        src={post.image_url || "/placeholder.svg?height=200&width=400"}
                         alt={post.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -199,7 +180,7 @@ export default function BlogPage() {
                         </div>
                       </div>
 
-                      <CardTitle className="text-lg text-white group-hover:text-violet-400 transition-colors line-clamp-2">
+                      <CardTitle className="text-lg text-white line-clamp-2">
                         {post.title}
                       </CardTitle>
 
@@ -214,8 +195,10 @@ export default function BlogPage() {
                       </div>
 
                       <Button variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto font-medium">
-                        Read more
-                        <ArrowRight className="w-4 h-4 ml-1" />
+                        <Link href={`/blog/${post.id}`} className="flex items-center">
+                          Read more
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Link>
                       </Button>
                     </div>
                   </CardContent>

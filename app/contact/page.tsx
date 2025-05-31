@@ -3,7 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Loader2 } from "lucide-react"
+import { useForm, ValidationError } from "@formspree/react"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,7 +16,8 @@ import { ErrorMessage, Loading } from "@/components/loading"
 
 export default function ContactPage() {
   const { portfolioData, isLoading, error } = usePortfolio()
-
+  const [state, handleSubmit] = useForm("xayzonpa")
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-950">
@@ -39,25 +41,6 @@ export default function ContactPage() {
   }
 
   const { personal } = portfolioData.data
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -95,75 +78,93 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name" className="text-slate-300">
+                          <label htmlFor="name" className="block text-sm font-medium text-slate-300">
                             Name
-                          </Label>
-                          <Input
+                          </label>
+                          <input
                             id="name"
                             name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="bg-slate-900/50 border-slate-700 text-white placeholder-slate-400 focus:border-violet-500"
+                            type="text"
+                            className="w-full px-3 py-2 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                             placeholder="Your name"
                             required
                           />
+                          <ValidationError prefix="Name" field="name" errors={state.errors} />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="text-slate-300">
+                          <label htmlFor="email" className="block text-sm font-medium text-slate-300">
                             Email
-                          </Label>
-                          <Input
+                          </label>
+                          <input
                             id="email"
                             name="email"
                             type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="bg-slate-900/50 border-slate-700 text-white placeholder-slate-400 focus:border-violet-500"
+                            className="w-full px-3 py-2 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                             placeholder="your@email.com"
                             required
                           />
+                          <ValidationError prefix="Email" field="email" errors={state.errors} />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject" className="text-slate-300">
+                        <label htmlFor="subject" className="block text-sm font-medium text-slate-300">
                           Subject
-                        </Label>
-                        <Input
+                        </label>
+                        <input
                           id="subject"
                           name="subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          className="bg-slate-900/50 border-slate-700 text-white placeholder-slate-400 focus:border-violet-500"
+                          type="text"
+                          className="w-full px-3 py-2 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                           placeholder="What's this about?"
                           required
                         />
+                        <ValidationError prefix="Subject" field="subject" errors={state.errors} />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-slate-300">
+                        <label htmlFor="message" className="block text-sm font-medium text-slate-300">
                           Message
-                        </Label>
-                        <Textarea
+                        </label>
+                        <textarea
                           id="message"
                           name="message"
-                          value={formData.message}
-                          onChange={handleChange}
                           rows={6}
-                          className="bg-slate-900/50 border-slate-700 text-white placeholder-slate-400 focus:border-violet-500 resize-none"
+                          className="w-full px-3 py-2 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-none"
                           placeholder="Tell me about your project or idea..."
                           required
                         />
+                        <ValidationError prefix="Message" field="message" errors={state.errors} />
                       </div>
 
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
+                        disabled={state.submitting}
+                        className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white disabled:opacity-50"
                       >
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
+                        {state.submitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : state.succeeded ? (
+                          <>
+                            <Mail className="w-4 h-4 mr-2" />
+                            Message Sent!
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4 mr-2" />
+                            Send Message
+                          </>
+                        )}
                       </Button>
+                      {state.errors && (
+                        <p className="text-red-400 text-sm text-center mt-2">
+                          {Object.values(state.errors).map((error: any) => error.message).join(", ")}
+                        </p>
+                      )}
                     </form>
                   </CardContent>
                 </Card>
@@ -293,9 +294,10 @@ export default function ContactPage() {
               </p>
               <Button
                 size="lg"
+                asChild
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
               >
-                Drop me a mail!
+                <a href={`mailto:${personal.email}`}>Drop me a mail!</a>
               </Button>
             </div>
           </div>

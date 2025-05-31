@@ -13,6 +13,7 @@ const navigation = [
   { name: "Projects", href: "/projects", icon: Briefcase },
   { name: "Blog", href: "/blog", icon: BookOpen },
   { name: "Contact", href: "/contact", icon: Mail },
+
 ]
 
 export function NavigationMenu() {
@@ -51,7 +52,7 @@ export function NavigationMenu() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/">
+            <Link href="/terminal" className="flex items-center">
               <Button
                 variant="outline"
                 size="sm"
@@ -95,7 +96,7 @@ export function NavigationMenu() {
                 </Link>
               ))}
               <div className="px-3 py-2 space-y-2">
-                <Link href="/">
+                <Link href="/terminal">
                   <Button
                     variant="outline"
                     size="sm"
@@ -105,14 +106,6 @@ export function NavigationMenu() {
                     Terminal Mode
                   </Button>
                 </Link>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full border-slate-700 text-slate-300 hover:bg-slate-800"
-                >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Resume
-                </Button>
               </div>
             </div>
           </div>

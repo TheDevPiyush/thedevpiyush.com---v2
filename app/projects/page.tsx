@@ -121,16 +121,20 @@ export default function ProjectsPage() {
                     </div>
 
                     <div className="flex space-x-4">
-                      {project.links.github && (
-                        <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
-                          <Github className="w-4 h-4 mr-2" />
-                          View Code
+                      {project?.links?.github && (
+                        <Button asChild variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
+                          <Link target="_blank" href={project.links.github} className="flex items-center">
+                            <Github className="w-4 h-4 mr-2" />
+                            View Code
+                          </Link>
                         </Button>
                       )}
-                      {project.links.live && (
-                        <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
+                      {project?.links?.live && (
+                        <Button asChild variant="outline" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+                          <Link target="_blank" href={project.links.live} className="flex items-center">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </Link>
                         </Button>
                       )}
                     </div>
@@ -140,7 +144,7 @@ export default function ProjectsPage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-2xl blur-3xl" />
                     <div className="relative aspect-video rounded-2xl bg-slate-800/30 border border-slate-700/50 backdrop-blur-sm overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src={project?.image_url || "/placeholder.svg?height=400&width=600"}
                         alt={project.title}
                         fill
                         className="object-cover"
@@ -209,19 +213,19 @@ export default function ProjectsPage() {
         {/* CTA Section */}
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-6">
+            <div className="space-y-7">
               <h2 className="text-3xl sm:text-4xl font-bold text-white">Interested in Working Together?</h2>
-              <p className="text-xl text-slate-300">
+              <p className="text-xl text-slate-300 my-2">
                 I'm always excited to take on new challenges and bring innovative ideas to life.
               </p>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
-                >
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+                <Link href="/contact">
                   Start a Project
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </section>

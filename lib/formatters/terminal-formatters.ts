@@ -58,23 +58,23 @@ export function formatPersonalInfo(data: PersonalInfo): string {
 
   return `
 ${isMobile ? "═".repeat(width) : "╔" + "═".repeat(width - 2) + "╗"}
-${isMobile ? ` ABOUT ${data.name.toUpperCase()}` : `║${` ABOUT ${data.name.toUpperCase()}`.padEnd(width - 2)}║`}
+${isMobile ? ` ABOUT ${data.name.toUpperCase()}` : `║${`                   ABOUT ${data.name.toUpperCase()}`.padEnd(width - 2)}║`}
 ${isMobile ? "═".repeat(width) : "╚" + "═".repeat(width - 2) + "╝"}
 
 👨‍💻 ${data.title} | 🌍 ${data.location} | ☕ Coffee Enthusiast
 
-OVERVIEW
+‎\nOVERVIEW
 ${"=".repeat(8)}
 ${data.bio}
 
-BACKGROUND
+‎\nBACKGROUND
 ${"=".repeat(10)}
 • 🎓 Computer Science graduate with a focus on web technologies
 • 🚀 Started coding during university, fell in love with the craft
 • 🏢 Worked with startups and established companies
 • 🌱 Always learning and exploring new technologies
 
-PHILOSOPHY
+‎\nPHILOSOPHY
 ${"=".repeat(10)}
 "${data.philosophy}"
 
@@ -84,11 +84,11 @@ I believe in:
 • Continuous learning and improvement
 • Collaboration and knowledge sharing
 
-WHEN I'M NOT CODING
+‎\nWHEN I'M NOT CODING
 ${"=".repeat(19)}
 ${data.interests.join("\n")}
 
-Want to know more? Try 'skills', 'experience', or 'projects'!
+‎\nWant to know more? Try 'skills', 'experience', or 'projects'!
 `
 }
 
@@ -239,7 +239,7 @@ export function formatExperience(
 
   let output = `
 ${isMobile ? "═".repeat(width) : "╔" + "═".repeat(width - 2) + "╗"}
-${isMobile ? " WORK EXPERIENCE" : `║${" WORK EXPERIENCE".padEnd(width - 2)}║`}
+${isMobile ? " WORK EXPERIENCE" : `║${"                   WORK EXPERIENCE".padEnd(width - 2)}║`}
 ${isMobile ? "═".repeat(width) : "╚" + "═".repeat(width - 2) + "╝"}
 
 💼 PROFESSIONAL JOURNEY
@@ -248,7 +248,7 @@ ${"=".repeat(23)}
 `
 
   experiences.forEach((exp) => {
-    output += `[${exp.period}] 🏢 ${exp.title.toUpperCase()}
+    output += `‎\n[${exp.period}] 🏢 ${exp.title.toUpperCase()}
 ${exp.company} | ${exp.location}
 ├── ${exp.description}
 ├── Technologies: ${exp.technologies.join(", ")}
@@ -258,24 +258,24 @@ ${exp.achievements.map((achievement) => `│   ├── 🎯 ${achievement}`).j
 `
   })
 
-  output += `🎓 EDUCATION
+  output += `‎\n🎓 EDUCATION
 ${"=".repeat(12)}
-[${education.period}] ${education.degree}
+‎\n[${education.period}] ${education.degree}
 ${education.institution}
 ├── Relevant Coursework: ${education.coursework.join(", ")}
 ├── GPA: ${education.gpa}
 ├── Activities: ${education.activities.join(", ")}
 └── Thesis: "${education.thesis}"
 
-🏆 CERTIFICATIONS & ACHIEVEMENTS
-${"=".repeat(32)}
+‎\n🏆 CERTIFICATIONS & ACHIEVEMENTS
+${"=".repeat(32)}‎\n
 ${certifications.map((cert) => `• ${cert.name} (${cert.year})`).join("\n")}
 • Hackathon Winner - SF TechCrunch Disrupt (2021)
 • Open Source Contributor - 50+ repositories
 • Speaker at 3 tech conferences
 
-📊 IMPACT METRICS
-${"=".repeat(17)}
+‎\n📊 IMPACT METRICS
+${"=".repeat(17)}‎\n
 Projects Delivered: 50+
 Team Members Mentored: 15+
 Code Reviews Conducted: 500+
@@ -296,24 +296,20 @@ export function formatBlog(posts: BlogPost[]): string {
 
   let output = `
 ${isMobile ? "═".repeat(width) : "╔" + "═".repeat(width - 2) + "╗"}
-${isMobile ? " LATEST BLOG POSTS" : `║${" LATEST BLOG POSTS".padEnd(width - 2)}║`}
+${isMobile ? " LATEST BLOG POSTS" : `║${"                   LATEST BLOG POSTS".padEnd(width - 2)}║`}
 ${isMobile ? "═".repeat(width) : "╚" + "═".repeat(width - 2) + "╝"}
 
 📝 RECENT ARTICLES
-${"=".repeat(18)}
-
-`
+${"=".repeat(18)}`
 
   if (featuredPost) {
-    output += `[📌 FEATURED] ${featuredPost.title}
+    output += `‎\n[📌 FEATURED] ${featuredPost.title}
 ├── Published: ${new Date(featuredPost.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
 ├── Read time: ${featuredPost.readTime}
 ├── Tags: ${featuredPost.tags.join(", ")}
 ├── Summary: ${featuredPost.excerpt}
-└── URL: ${featuredPost.url}
-
-`
-  }
+└── URL: https://thedevpiyush.com/blog/${featuredPost.id}
+‎\n`}
 
   otherPosts.forEach((post) => {
     const badge = post.trending ? "🔥 TRENDING" : post.popular ? "💡 POPULAR" : "📝 ARTICLE"
@@ -322,37 +318,10 @@ ${"=".repeat(18)}
 ├── Read time: ${post.readTime}
 ├── Tags: ${post.tags.join(", ")}
 ├── Summary: ${post.excerpt}
-└── URL: ${post.url}
-
-`
+└── URL: https://thedevpiyush.com/blog/${post.id}
+‎\n`
   })
 
-  output += `📊 BLOG STATISTICS
-${"=".repeat(18)}
-Total Posts: 47
-Total Views: 125K+
-Subscribers: 2.3K
-Average Read Time: 7 minutes
-Most Popular Tag: React (12 posts)
-
-📚 POPULAR SERIES
-${"=".repeat(17)}
-🔥 "React Mastery" (8 parts)
-🔥 "Node.js Deep Dive" (6 parts)  
-🔥 "Database Fundamentals" (5 parts)
-🔥 "CSS Modern Techniques" (4 parts)
-
-💌 NEWSLETTER
-${"=".repeat(13)}
-📧 Subscribe: newsletter.alexchen.dev
-📅 Frequency: Weekly (Sundays)
-👥 Subscribers: 2,300+
-📈 Open Rate: 42%
-
-Get notified about new posts, exclusive content, and tech insights!
-
-Visit blog.alexchen.dev to read all articles! 📖
-`
 
   return output
 }
@@ -363,13 +332,13 @@ export function formatContact(personal: PersonalInfo): string {
 
   return `
 ${isMobile ? "═".repeat(width) : "╔" + "═".repeat(width - 2) + "╗"}
-${isMobile ? " CONTACT INFORMATION" : `║${" CONTACT INFORMATION".padEnd(width - 2)}║`}
+${isMobile ? " CONTACT INFORMATION" : `║${"                   CONTACT INFORMATION".padEnd(width - 2)}║`}
 ${isMobile ? "═".repeat(width) : "╚" + "═".repeat(width - 2) + "╝"}
 
 📧 LET'S CONNECT!
 ${"=".repeat(17)}
 
-PRIMARY CONTACT
+‎\nPRIMARY CONTACT
 ${"=".repeat(15)}
 📧 Email: ${personal.email}
    └── Best for: Project inquiries, collaborations
@@ -382,7 +351,7 @@ ${"=".repeat(15)}
 📍 Location: ${personal.location}
    └── Open to: Remote work worldwide, local meetups
 
-PROFESSIONAL NETWORKS
+‎\nPROFESSIONAL NETWORKS
 ${"=".repeat(21)}
 💼 LinkedIn: ${personal.social.linkedin}
    └── Connect for: Professional networking
@@ -396,48 +365,9 @@ ${"=".repeat(21)}
 💬 Discord: ${personal.social.discord}
    └── Chat about: Tech discussions, gaming
 
-AVAILABILITY
-${"=".repeat(12)}
-🟢 Status: Available for new projects
-📅 Next availability: Immediate
-⏰ Preferred meeting times: 
-   ├── PST: 9AM - 6PM (Mon-Fri)
-   ├── EST: 12PM - 9PM (Mon-Fri)  
-   └── GMT: 5PM - 2AM (Mon-Fri)
-
-PROJECT TYPES I'M INTERESTED IN
-${"=".repeat(31)}
-✅ Full-stack web applications
-✅ E-commerce platforms  
-✅ SaaS products
-✅ API development
-✅ Database design
-✅ Performance optimization
-✅ Code reviews and consulting
-✅ Team mentoring
-
-COLLABORATION PREFERENCES
-${"=".repeat(25)}
-🤝 Remote-first approach
-📹 Regular video calls for alignment
-📝 Clear documentation and communication
-🔄 Agile/iterative development process
-🧪 Test-driven development
-📊 Data-driven decision making
-
-RESPONSE EXPECTATIONS
-${"=".repeat(20)}
-📧 Email: Within 24 hours
-📱 Phone: Same day (business hours)
-💼 LinkedIn: Within 48 hours
-🐙 GitHub: Within 72 hours
-
-Ready to start something amazing together? 
+‎\nReady to start something amazing together? 
 Drop me a line at ${personal.email}! 🚀
-
-Type 'resume' to download my full CV!
-`
-}
+`}
 
 function getStatIcon(key: string): string {
   const icons: { [key: string]: string } = {

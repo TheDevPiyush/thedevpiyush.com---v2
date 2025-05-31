@@ -29,6 +29,7 @@ export interface Project {
   description: string
   longDescription: string
   techStack: string[]
+  image_url: string
   features: string[]
   stats: {
     [key: string]: string
@@ -60,7 +61,7 @@ export interface BlogPost {
   publishDate: string
   readTime: string
   tags: string[]
-  url: string
+  image_url: string
   featured?: boolean
   trending?: boolean
   popular?: boolean

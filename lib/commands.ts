@@ -28,15 +28,14 @@ Available Commands:
 
 ‎\n📋 COMMANDS
 
-  help, h, ?           - Show this help message
+  help, h              - Show this help message
   about, bio           - Learn about me
   skills, tech         - View my technical skills
   projects, work       - See my projects and work
   experience, exp      - View my work experience
   contact, reach       - Get my contact information
   blog, articles       - Read my latest blog posts
-  resume, cv           - View my resume
-  open-ui              - Open portfolio in UI mode
+  open-ui, ui          - Open portfolio in UI mode
 
 ‎\n💡 TIPS
   - Type 'open-ui' to open the portfolio in UI mode
@@ -134,15 +133,6 @@ Available Commands:
     },
   },
 
-  {
-    name: "resume",
-    description: "View/download resume",
-    aliases: ["cv", "curriculum"],
-    execute: async () => {
-      const data = await getPortfolioData()
-      return `Resume`
-    },
-  },
   {
     name: "clear",
     description: "Clear the terminal",

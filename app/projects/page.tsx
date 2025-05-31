@@ -109,7 +109,7 @@ export default function ProjectsPage() {
                       </ul>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 py-4">
+                    {project?.stats && <div className="grid grid-cols-2 gap-4 py-4">
                       {Object.entries(project.stats)
                         .slice(0, 4)
                         .map(([key, value]: any) => (
@@ -118,7 +118,7 @@ export default function ProjectsPage() {
                             <div className="text-sm text-slate-400 capitalize">{key}</div>
                           </div>
                         ))}
-                    </div>
+                    </div>}
 
                     <div className="flex space-x-4">
                       {project?.links?.github && (

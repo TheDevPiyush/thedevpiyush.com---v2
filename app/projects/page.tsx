@@ -158,57 +158,58 @@ export default function ProjectsPage() {
         </section>
 
         {/* Other Projects */}
-        <section className="py-20 bg-slate-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Other Projects</h2>
-              <p className="text-slate-300">
-                Additional projects and experiments that showcase different aspects of my development skills.
-              </p>
-            </div>
+        {otherProjects.length > 0 &&
+          <section className="py-20 bg-slate-900/30">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mb-16">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Other Projects</h2>
+                <p className="text-slate-300">
+                  Additional projects and experiments that showcase different aspects of my development skills.
+                </p>
+              </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherProjects.map((project: Project, index: number) => (
-                <Card
-                  key={index}
-                  className="group bg-slate-800/30 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/50 transition-all duration-300"
-                >
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <CardTitle className="text-xl text-white group-hover:text-violet-400 transition-colors">
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-slate-300 leading-relaxed">
-                        {project.description}
-                      </CardDescription>
-                      <div className="flex flex-wrap gap-2">
-                        {project.techStack.map((tech: string) => (
-                          <Badge key={tech} variant="outline" className="text-xs border-slate-700 text-slate-400">
-                            {tech}
-                          </Badge>
-                        ))}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {otherProjects.map((project: Project, index: number) => (
+                  <Card
+                    key={index}
+                    className="group bg-slate-800/30 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/50 transition-all duration-300"
+                  >
+                    <CardContent className="p-6">
+                      <div className="space-y-4">
+                        <CardTitle className="text-xl text-white group-hover:text-violet-400 transition-colors">
+                          {project.title}
+                        </CardTitle>
+                        <CardDescription className="text-slate-300 leading-relaxed">
+                          {project.description}
+                        </CardDescription>
+                        <div className="flex flex-wrap gap-2">
+                          {project.techStack.map((tech: string) => (
+                            <Badge key={tech} variant="outline" className="text-xs border-slate-700 text-slate-400">
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                        <div className="flex space-x-3 pt-2">
+                          {project.links.github && (
+                            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
+                              <Github className="w-4 h-4 mr-2" />
+                              Code
+                            </Button>
+                          )}
+                          {project.links.live && (
+                            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Demo
+                            </Button>
+                          )}
+                        </div>
                       </div>
-                      <div className="flex space-x-3 pt-2">
-                        {project.links.github && (
-                          <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
-                            <Github className="w-4 h-4 mr-2" />
-                            Code
-                          </Button>
-                        )}
-                        {project.links.live && (
-                          <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                            Demo
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>}
 
         {/* CTA Section */}
         <section className="py-20">

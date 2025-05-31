@@ -123,7 +123,6 @@ ${isMobile ? "═".repeat(width) : "╚" + "═".repeat(width - 2) + "╝"}
 }
 
 export function formatProjects(projects: Project[]): string {
-  console.log(projects)
   const featuredProjects = projects.filter((p) => p.featured)
   const otherProjects = projects.filter((p) => !p.featured)
   const width = getTerminalWidth()

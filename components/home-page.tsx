@@ -21,8 +21,6 @@ export function HomePage() {
   }
 
   const { personal, skills, projects, experience, blog, stats } = portfolioData.data
-  console.log("Personal data:", personal)
-  console.log("Image URL:", personal.image)
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">

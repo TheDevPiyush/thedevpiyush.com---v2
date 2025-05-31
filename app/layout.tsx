@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "TheDevPiyush - Portfolio",
-  description: "Portfolio of TheDevPiyush, Full-Stack & Blockchain Developer",
+  description: "Portfolio of Piyush Choudhary, Full-Stack & Blockchain Developer",
   generator: 'v0.dev'
 }
 

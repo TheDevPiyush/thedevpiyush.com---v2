@@ -12,9 +12,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Alex Chen - Terminal Portfolio",
-  description: "Interactive terminal-style portfolio of Alex Chen, Full-Stack Developer",
-    generator: 'v0.dev'
+  title: "TheDevPiyush - Portfolio",
+  description: "Portfolio of TheDevPiyush, Full-Stack & Blockchain Developer",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({

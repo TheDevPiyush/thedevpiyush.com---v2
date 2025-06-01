@@ -14,7 +14,6 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "TheDevPiyush - Portfolio",
   description: "Portfolio of Piyush Choudhary, Full-Stack & Blockchain Developer",
-  generator: 'v0.dev'
 }
 
 export default function RootLayout({

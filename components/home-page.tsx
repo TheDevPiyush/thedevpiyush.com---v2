@@ -54,17 +54,17 @@ export function HomePage() {
               </div>
 
               <div className="flex items-center space-x-6 text-slate-400">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center text-sm font-semibold space-x-2">
                   <MapPin className="w-4 h-4" />
                   <span>{personal.location}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center text-sm font-semibold space-x-2">
                   <Calendar className="w-4 h-4" />
                   <span>{stats.experience} years experience</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center text-sm font-semibold space-x-2">
                   <Coffee className="w-4 h-4" />
-                  <span>Available for work</span>
+                  <span>{personal.working_at}</span>
                 </div>
               </div>
             </div>
@@ -329,7 +329,7 @@ export function HomePage() {
                 <CardContent className="p-6 text-center">
                   <Coffee className="w-8 h-8 text-violet-400 mx-auto mb-4" />
                   <h3 className="font-semibold text-white mb-2">Status</h3>
-                  <p className="text-slate-300 text-xs">Available for work</p>
+                  <p className="text-slate-300 text-xs">{personal.working_at}</p>
                 </CardContent>
               </Card>
             </div>

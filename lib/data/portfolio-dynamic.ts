@@ -14,6 +14,7 @@ export function transformPortfolioData(data: PortfolioData) {
       location: data.personal.location,
       email: data.personal.email,
       phone: data.personal.phone,
+      working_at: data.personal.working_at,
       bio: data.personal.bio,
       philosophy: data.personal.philosophy,
       image: data.personal.image,

@@ -11,7 +11,6 @@ import type { Skill, Experience, Education, Certification } from "@/lib/data/por
 
 export default function AboutPage() {
   const { portfolioData, isLoading, error } = usePortfolio()
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-950">
@@ -34,13 +33,13 @@ export default function AboutPage() {
     )
   }
 
-  const { personal, skills, experience, education, certifications } = portfolioData.data
+  const { personal, skills, experience, education, certifications, stats } = portfolioData.data
 
   return (
     <div className="min-h-screen bg-slate-950">
       <NavigationMenu />
 
-      <div className="pt-16">
+      <div className="pt-10">
         {/* Hero Section */}
         <section className="py-20 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,11 +57,11 @@ export default function AboutPage() {
                   </div>
                   <div className="flex items-center space-x-3 text-slate-300">
                     <Calendar className="w-5 h-5 text-violet-400" />
-                    <span>5+ years of experience</span>
+                    <span>{stats.experience} years of experience</span>
                   </div>
                   <div className="flex items-center space-x-3 text-slate-300">
                     <Coffee className="w-5 h-5 text-violet-400" />
-                    <span>Fueled by coffee and curiosity</span>
+                    <span>{personal.working_at}</span>
                   </div>
                 </div>
               </div>

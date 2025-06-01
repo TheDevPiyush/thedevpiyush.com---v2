@@ -88,21 +88,8 @@ export default function AboutPage() {
             <div className="space-y-8">
               <h2 className="text-3xl font-bold text-white text-center">My Story</h2>
               <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
-                <p>
-                  My journey into web development started during my computer science studies, where I discovered the
-                  perfect blend of creativity and logic that programming offers. What began as curiosity quickly evolved
-                  into a passion for building digital solutions that solve real-world problems.
-                </p>
-                <p>
-                  Over the years, I've had the privilege of working with startups and established companies, helping
-                  them bring their visions to life through code. I believe in writing clean, maintainable code and
-                  creating user experiences that are both beautiful and functional.
-                </p>
-                <p>
-                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects,
-                  hiking in the Bay Area, or experimenting with photography. I'm always eager to learn and take on new
-                  challenges.
-                </p>
+                <p>I got into coding back in class 9 when my school computer teacher introduced us to Java. That first look at code really stuck with me. Then during the 2020 lockdown, I finally got my first PC and started exploring different languages and frameworks on my own.</p>
+                <p>Lockdown gave me the time (and patience) to really dive in. For me, programming isn’t just about writing code—it feels more like art. It's where creativity and logic come together, and that’s what keeps me hooked.</p>
               </div>
             </div>
           </div>

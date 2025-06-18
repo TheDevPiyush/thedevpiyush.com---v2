@@ -1,33 +1,25 @@
-"use client"
-
 import Image from "next/image"
 import { MapPin, Calendar, Coffee, Code, Heart, Award } from "lucide-react"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { usePortfolio } from "@/components/portfolio-provider"
-import { Loading, ErrorMessage } from "@/components/loading"
+import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Skill, Experience, Education, Certification } from "@/lib/data/portfolio"
 
-export default function AboutPage() {
-  const { portfolioData, isLoading, error } = usePortfolio()
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-slate-950">
-        <NavigationMenu />
-        <div className="pt-16">
-          <Loading />
-        </div>
-      </div>
-    )
-  }
+export default async function AboutPage() {
+  const portfolioData = await getPortfolioData()
 
-  if (error || !portfolioData?.data) {
+  if (portfolioData.error || !portfolioData.data) {
     return (
       <div className="min-h-screen bg-slate-950">
         <NavigationMenu />
         <div className="pt-16">
-          <ErrorMessage message={error || "Failed to load portfolio data"} />
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-red-400 mb-4">Error Loading Portfolio</h1>
+              <p className="text-slate-300">{portfolioData.error || "Failed to load portfolio data"}</p>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -89,7 +81,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-white text-center">My Story</h2>
               <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
                 <p>I got into coding back in class 9 when my school computer teacher introduced us to Java. That first look at code really stuck with me. Then during the 2020 lockdown, I finally got my first PC and started exploring different languages and frameworks on my own.</p>
-                <p>Lockdown gave me the time (and patience) to really dive in. For me, programming isn’t just about writing code—it feels more like art. It's where creativity and logic come together, and that’s what keeps me hooked.</p>
+                <p>Lockdown gave me the time (and patience) to really dive in. For me, programming isn't just about writing code—it feels more like art. It's where creativity and logic come together, and that's what keeps me hooked.</p>
               </div>
             </div>
           </div>
@@ -106,14 +98,14 @@ export default function AboutPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[...new Set(skills.map((skill: any) => skill.category))].map((category: any) => (
-                <Card key={category} className="bg-slate-800/30 overflow-hidden rounded-lg border-slate-700/50 backdrop-blur-sm">
+              {([...new Set(skills.map((skill: Skill) => skill.category))] as string[]).map((category: string, index: number) => (
+                <Card key={`${category}-${index}`} className="bg-slate-800/30 overflow-hidden rounded-lg border-slate-700/50 backdrop-blur-sm">
                   <CardContent className="p-6 rounded-lg">
                     <h3 className="text-lg font-semibold text-white mb-4">{category}</h3>
                     <div className="space-y-3">
                       {skills
-                        .filter((skill: any) => skill.category === category)
-                        .map((skill: any) => (
+                        .filter((skill: Skill) => skill.category === category)
+                        .map((skill: Skill) => (
                           <div key={skill.name} className="space-y-2">
                             <div className="flex justify-between items-center">
                               <span className="text-slate-300 text-sm">{skill.name}</span>
@@ -144,7 +136,7 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-8">
-              {experience.map((exp: any, index: number) => (
+              {experience.map((exp: Experience, index: number) => (
                 <Card key={index} className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm">
                   <CardContent className="p-8">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -158,7 +150,7 @@ export default function AboutPage() {
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-slate-400">Key Achievements:</h4>
                       <ul className="space-y-1">
-                        {exp.achievements.map((achievement: any, i: number) => (
+                        {exp.achievements.map((achievement: string, i: number) => (
                           <li key={i} className="text-slate-300 text-sm flex items-start">
                             <span className="text-violet-400 mr-2">•</span>
                             {achievement}
@@ -204,12 +196,6 @@ export default function AboutPage() {
                           ))}
                         </div>
                       </div>
-                      {education.thesis && (
-                        <div>
-                          <h4 className="text-sm font-medium text-slate-400 mb-1">Thesis:</h4>
-                          <p className="text-slate-300 italic">"{education.thesis}"</p>
-                        </div>
-                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -219,65 +205,29 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-3xl font-bold text-white mb-8">Certifications</h2>
                 <div className="space-y-4">
-                  {certifications.map((cert: any, index: number) => (
+                  {certifications.map((cert: Certification, index: number) => (
                     <Card key={index} className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm">
                       <CardContent className="p-6">
-                        <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-violet-600/20 rounded-lg">
-                            <Award className="w-6 h-6 text-violet-400" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-white">{cert.name}</h3>
-                            <p className="text-slate-400">
-                              {cert.issuer} • {cert.year}
-                            </p>
-                          </div>
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-semibold text-white">{cert.name}</h3>
+                          <p className="text-violet-400">{cert.issuer}</p>
+                          <p className="text-slate-400 text-sm">{cert.year}</p>
+                          {cert.url && (
+                            <a
+                              href={cert.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-violet-400 hover:text-violet-300 text-sm inline-block"
+                            >
+                              View Credential →
+                            </a>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Values Section */}
-        <section className="py-20 bg-slate-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">What Drives Me</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Code,
-                  title: "Clean Code",
-                  description:
-                    "I believe in writing code that is not only functional but also readable and maintainable.",
-                },
-                {
-                  icon: Heart,
-                  title: "User-Centric",
-                  description:
-                    "Every line of code I write is with the end user in mind, creating meaningful experiences.",
-                },
-                {
-                  icon: Coffee,
-                  title: "Continuous Learning",
-                  description:
-                    "Technology evolves rapidly, and I'm committed to staying current with the latest trends.",
-                },
-              ].map((value, index) => (
-                <Card key={index} className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm text-center">
-                  <CardContent className="p-8">
-                    <value.icon className="w-12 h-12 text-violet-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-white mb-3">{value.title}</h3>
-                    <p className="text-slate-300 leading-relaxed">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
             </div>
           </div>
         </section>

@@ -1,8 +1,8 @@
-import { fetchPortfolioData } from "../api/portfolio"
+import { getPortfolioData as getPortfolioDataFromSupabase } from "../supabase/queries"
 import type { PortfolioData } from "../supabase/types"
 
 export async function getPortfolioDataCached(): Promise<PortfolioData | null> {
-  return await fetchPortfolioData()
+  return await getPortfolioDataFromSupabase()
 }
 
 // Transform database data to match the existing interface
@@ -83,6 +83,7 @@ export function transformPortfolioData(data: PortfolioData) {
       publishDate: post.publish_date,
       readTime: post.read_time,
       tags: post.tags,
+      url: post.url || post.id,
       image_url: post.image_url,
       featured: post.is_featured,
       trending: post.is_trending,

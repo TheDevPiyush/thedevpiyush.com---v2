@@ -1,13 +1,10 @@
-"use client"
-
 import Image from "next/image"
 import { Calendar, Clock, ArrowRight, Tag } from "lucide-react"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { usePortfolio } from "@/components/portfolio-provider"
-import { Loading, ErrorMessage } from "@/components/loading"
+import { getPortfolioData } from "@/lib/data/portfolio"
 import type { BlogPost } from "@/lib/data/portfolio"
 import Link from "next/link"
 
@@ -16,26 +13,20 @@ interface Category {
   count: number
 }
 
-export default function BlogPage() {
-  const { portfolioData, isLoading, error } = usePortfolio()
+export default async function BlogPage() {
+  const portfolioData = await getPortfolioData()
 
-  if (isLoading) {
+  if (portfolioData.error || !portfolioData.data) {
     return (
       <div className="min-h-screen bg-slate-950">
         <NavigationMenu />
         <div className="pt-16">
-          <Loading />
-        </div>
-      </div>
-    )
-  }
-
-  if (error || !portfolioData?.data) {
-    return (
-      <div className="min-h-screen bg-slate-950">
-        <NavigationMenu />
-        <div className="pt-16">
-          <ErrorMessage message={error || "Failed to load portfolio data"} />
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-red-400 mb-4">Error Loading Portfolio</h1>
+              <p className="text-slate-300">{portfolioData.error || "Failed to load portfolio data"}</p>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -129,7 +120,7 @@ export default function BlogPage() {
                           </div>
                         </div>
                         <Button asChild className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
-                          <Link href={`/blog/${featuredPost.id}`} className="flex items-center">
+                          <Link href={`/blog/${featuredPost.url}`} className="flex items-center">
                             Read Article
                             <ArrowRight className="w-4 h-4 ml-2" />
                           </Link>
@@ -195,7 +186,7 @@ export default function BlogPage() {
                       </div>
 
                       <Button variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto font-medium">
-                        <Link href={`/blog/${post.id}`} className="flex items-center">
+                        <Link href={`/blog/${post.url}`} className="flex items-center">
                           Read more
                           <ArrowRight className="w-4 h-4 ml-1" />
                         </Link>

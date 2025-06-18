@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { ExternalLink, Github, Star } from "lucide-react"
@@ -7,30 +5,23 @@ import { NavigationMenu } from "@/components/navigation-menu"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { usePortfolio } from "@/components/portfolio-provider"
-import { Loading, ErrorMessage } from "@/components/loading"
+import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Project } from "@/lib/data/portfolio"
 
-export default function ProjectsPage() {
-  const { portfolioData, isLoading, error } = usePortfolio()
+export default async function ProjectsPage() {
+  const portfolioData = await getPortfolioData()
 
-  if (isLoading) {
+  if (portfolioData.error || !portfolioData.data) {
     return (
       <div className="min-h-screen bg-slate-950">
         <NavigationMenu />
         <div className="pt-16">
-          <Loading />
-        </div>
-      </div>
-    )
-  }
-
-  if (error || !portfolioData?.data) {
-    return (
-      <div className="min-h-screen bg-slate-950">
-        <NavigationMenu />
-        <div className="pt-16">
-          <ErrorMessage message={error || "Failed to load portfolio data"} />
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-red-400 mb-4">Error Loading Portfolio</h1>
+              <p className="text-slate-300">{portfolioData.error || "Failed to load portfolio data"}</p>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -210,26 +201,6 @@ export default function ProjectsPage() {
               </div>
             </div>
           </section>}
-
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-7">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white">Interested in Working Together?</h2>
-              <p className="text-xl text-slate-300 my-2">
-                I'm always excited to take on new challenges and bring innovative ideas to life.
-              </p>
-              <Button
-                asChild
-                size="lg"
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
-                <Link href="/contact">
-                  Start a Project
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   )

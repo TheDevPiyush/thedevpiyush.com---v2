@@ -98,7 +98,7 @@ export function Terminal() {
 
         if (command.name === "open-ui" || command.aliases?.includes("ui")) {
           if (typeof window !== "undefined") {
-            router.push("/home");
+            router.push("/");
             return
           }
         }

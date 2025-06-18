@@ -1,6 +1,6 @@
 import { getPortfolioDataCached, transformPortfolioData } from "./portfolio-dynamic"
 
-export interface PersonalInfo {
+export interface PersonalInfo { 
   name: string
   title: string
   location: string
@@ -58,9 +58,11 @@ export interface BlogPost {
   id: string
   title: string
   excerpt: string
+  content?: string
   publishDate: string
   readTime: string
   tags: string[]
+  url: string
   image_url: string
   featured?: boolean
   trending?: boolean

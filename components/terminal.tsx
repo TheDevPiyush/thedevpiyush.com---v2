@@ -4,8 +4,8 @@ import type React from "react"
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { commands } from "@/lib/commands"
-import { usePortfolio } from "@/components/portfolio-provider"
 import { useRouter } from "next/navigation"
+
 interface TerminalLine {
   type: "input" | "output" | "error"
   content: string
@@ -13,7 +13,6 @@ interface TerminalLine {
 }
 
 export function Terminal() {
-  const { isLoading } = usePortfolio()
   const [lines, setLines] = useState<TerminalLine[]>([])
   const [currentInput, setCurrentInput] = useState("")
   const [commandHistory, setCommandHistory] = useState<string[]>([])
@@ -29,13 +28,13 @@ export function Terminal() {
     }
 
     const welcomeLines = [
-      !isLoading && "╔══════════════════════════════════════════════════════════════╗",
-      !isLoading && "║                Piyush Choudhary - PORTFOLIO v2.0             ║",
-      !isLoading && "║                  Full-Stack & Blockchain Dev                 ║",
-      !isLoading && "╚══════════════════════════════════════════════════════════════╝",
+      "╔══════════════════════════════════════════════════════════════╗",
+      "║                Piyush Choudhary - PORTFOLIO v2.0             ║",
+      "║                  Full-Stack & Blockchain Dev                 ║",
+      "╚══════════════════════════════════════════════════════════════╝",
       "",
-      isLoading ? "Loading portfolio data from database..." : "Welcome to thedevpiyush.com!",
-      isLoading ? "Please wait..." : "Type 'help' to see available commands or 'about' to learn more about me.",
+      "Welcome to thedevpiyush.com!",
+      "Type 'help' to see available commands or 'about' to learn more about me.",
       "",
     ]
 
@@ -44,7 +43,7 @@ export function Terminal() {
         setLines((prev) => [...prev, { type: "output", content: line as string }])
       }, index * 100)
     })
-  }, [isLoading])
+  }, [])
 
   // Auto-scroll to bottom
   useEffect(() => {

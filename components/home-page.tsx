@@ -67,6 +67,7 @@ interface HomePageProps {
       readTime: string
       tags: string[]
       image_url: string
+      url: string
       featured?: boolean
       trending?: boolean
       popular?: boolean
@@ -415,7 +416,7 @@ export function HomePage({ data }: HomePageProps) {
                     </div>
 
                     <Button variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto font-medium">
-                      <Link href={`/blog/${post.id}`} className="flex items-center">
+                      <Link href={`/blog/${post.url}`} className="flex items-center">
                         Read more
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </Link>

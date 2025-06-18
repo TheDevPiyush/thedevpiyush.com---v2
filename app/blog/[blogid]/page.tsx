@@ -8,6 +8,9 @@ import type { BlogPost } from "@/lib/data/portfolio"
 import type { Metadata } from "next"
 import Link from "next/link"
 
+// Force revalidation every 60 seconds (1 minute)
+export const revalidate = 60
+
 interface BlogPostPageProps {
     params: {
         blogid: string

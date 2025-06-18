@@ -17,6 +17,29 @@ const nextConfig = {
             }
         ],
     },
+    // Vercel-specific optimizations
+    experimental: {
+        // Enable ISR (Incremental Static Regeneration)
+        isrMemoryCacheSize: 0,
+    },
+    // Add headers to prevent aggressive caching
+    async headers() {
+        return [{
+                source: '/blog/:path*',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'public, s-maxage=60, stale-while-revalidate=300',
+                }, ],
+            },
+            {
+                source: '/api/:path*',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'no-cache, no-store, must-revalidate',
+                }, ],
+            },
+        ]
+    },
 }
 
 export default nextConfig

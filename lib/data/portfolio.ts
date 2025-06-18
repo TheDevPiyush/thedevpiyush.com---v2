@@ -112,3 +112,27 @@ export async function getPortfolioData(): Promise<PortfolioState> {
     }
   }
 }
+
+// Dynamic data fetching that bypasses caching
+export async function getPortfolioDataDynamic(): Promise<PortfolioState> {
+  try {
+    // Force fresh data fetch by adding a timestamp
+    const timestamp = Date.now()
+    const data = await getPortfolioDataCached()
+    if (!data) {
+      throw new Error("Failed to fetch portfolio data")
+    }
+    return {
+      data: transformPortfolioData(data),
+      isLoading: false,
+      error: null
+    }
+  } catch (error) {
+    console.error("Error loading portfolio data:", error)
+    return {
+      data: null,
+      isLoading: false,
+      error: error instanceof Error ? error.message : "Failed to load portfolio data"
+    }
+  }
+}

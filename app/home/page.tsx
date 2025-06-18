@@ -2,6 +2,9 @@ import { NavigationMenu } from "@/components/navigation-menu"
 import { HomePage } from "@/components/home-page"
 import { getPortfolioData } from "@/lib/data/portfolio"
 
+// Force revalidation every 60 seconds (1 minute)
+export const revalidate = 60
+
 export default async function UIHomePage() {
   const portfolioData = await getPortfolioData()
   console.log(portfolioData)

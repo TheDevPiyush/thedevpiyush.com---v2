@@ -8,6 +8,9 @@ import { getPortfolioData } from "@/lib/data/portfolio"
 import type { BlogPost } from "@/lib/data/portfolio"
 import Link from "next/link"
 
+// Force revalidation every 60 seconds (1 minute)
+export const revalidate = 60
+
 interface Category {
   name: string
   count: number

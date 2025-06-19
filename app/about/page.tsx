@@ -39,7 +39,7 @@ export default async function AboutPage() {
               <div className="space-y-8">
                 <div className="space-y-6">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>About Me</h1>
-                  <p className="text-xl leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.bio}</p>
+                  <p className="text-xl leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.about_me}</p>
                 </div>
 
                 <div className="space-y-4">

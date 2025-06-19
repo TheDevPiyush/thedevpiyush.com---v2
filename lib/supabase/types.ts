@@ -7,6 +7,7 @@ export interface PersonalInfo {
   email: string
   phone: string
   bio: string
+  about_me: string
   philosophy: string
   image?: string
   github_url: string

@@ -13,13 +13,13 @@ export default async function ProjectsPage() {
 
   if (portfolioData.error || !portfolioData.data) {
     return (
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))' }}>
         <NavigationMenu />
         <div className="pt-16">
           <div className="flex items-center justify-center min-h-screen">
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-red-400 mb-4">Error Loading Portfolio</h1>
-              <p className="text-slate-300">{portfolioData.error || "Failed to load portfolio data"}</p>
+              <h1 className="text-2xl font-bold mb-4" style={{ color: 'rgb(239 68 68)' }}>Error Loading Portfolio</h1>
+              <p style={{ color: 'rgb(var(--color-text-secondary))' }}>{portfolioData.error || "Failed to load portfolio data"}</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default async function ProjectsPage() {
   const otherProjects = projects.filter((p: Project) => !p.featured)
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))' }}>
       <NavigationMenu />
 
       <div className="pt-16">
@@ -40,8 +40,8 @@ export default async function ProjectsPage() {
         <section className="py-20 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">My Projects</h1>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>My Projects</h1>
+              <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>
                 A collection of projects that showcase my skills in full-stack development, from concept to deployment.
                 Each project represents a unique challenge and learning experience.
               </p>
@@ -53,8 +53,8 @@ export default async function ProjectsPage() {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Featured Projects</h2>
-              <p className="text-slate-300">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>Featured Projects</h2>
+              <p style={{ color: 'rgb(var(--color-text-secondary))' }}>
                 These are some of my most significant projects that demonstrate my expertise and problem-solving
                 abilities.
               </p>
@@ -69,11 +69,11 @@ export default async function ProjectsPage() {
                   <div className={`space-y-6 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
                     <div className="space-y-4">
                       <div className="flex items-center space-x-2">
-                        <Star className="w-5 h-5 text-violet-400" />
-                        <span className="text-sm font-medium text-violet-400">Featured Project</span>
+                        <Star className="w-5 h-5" style={{ color: 'rgb(var(--color-primary-light))' }} />
+                        <span className="text-sm font-medium" style={{ color: 'rgb(var(--color-primary-light))' }}>Featured Project</span>
                       </div>
-                      <h3 className="text-3xl font-bold text-white">{project.title}</h3>
-                      <p className="text-lg text-slate-300 leading-relaxed">{project.longDescription}</p>
+                      <h3 className="text-3xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>{project.title}</h3>
+                      <p className="text-lg leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>{project.longDescription}</p>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
@@ -81,7 +81,7 @@ export default async function ProjectsPage() {
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className="bg-slate-800/50 text-slate-200 border-slate-700/50"
+                          style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.5)', color: 'rgb(var(--color-text-secondary))', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}
                         >
                           {tech}
                         </Badge>
@@ -89,11 +89,11 @@ export default async function ProjectsPage() {
                     </div>
 
                     <div className="space-y-3">
-                      <h4 className="text-sm font-medium text-slate-400">Key Features:</h4>
+                      <h4 className="text-sm font-medium" style={{ color: 'rgb(var(--color-text-tertiary))' }}>Key Features:</h4>
                       <ul className="space-y-2">
                         {project.features.map((feature: string, i: number) => (
-                          <li key={i} className="text-slate-300 flex items-start">
-                            <span className="text-violet-400 mr-2">✓</span>
+                          <li key={i} className="flex items-start" style={{ color: 'rgb(var(--color-text-secondary))' }}>
+                            <span className="mr-2" style={{ color: 'rgb(var(--color-primary-light))' }}>✓</span>
                             {feature}
                           </li>
                         ))}
@@ -105,15 +105,15 @@ export default async function ProjectsPage() {
                         .slice(0, 4)
                         .map(([key, value]: any) => (
                           <div key={key} className="text-center">
-                            <div className="text-xl font-bold text-violet-400">{value}</div>
-                            <div className="text-sm text-slate-400 capitalize">{key}</div>
+                            <div className="text-xl font-bold" style={{ color: 'rgb(var(--color-primary-light))' }}>{value}</div>
+                            <div className="text-sm capitalize" style={{ color: 'rgb(var(--color-text-tertiary))' }}>{key}</div>
                           </div>
                         ))}
                     </div>}
 
                     <div className="flex space-x-4">
                       {project?.links?.github && (
-                        <Button asChild variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
+                        <Button asChild variant="outline" style={{ border: '1px solid rgb(var(--color-border-primary))', color: 'rgb(var(--color-text-secondary))' }} className="hover:bg-opacity-80">
                           <Link target="_blank" href={project.links.github} className="flex items-center">
                             <Github className="w-4 h-4 mr-2" />
                             View Code
@@ -121,7 +121,7 @@ export default async function ProjectsPage() {
                         </Button>
                       )}
                       {project?.links?.live && (
-                        <Button asChild variant="outline" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+                        <Button asChild style={{ background: 'var(--gradient-secondary)', color: 'rgb(var(--color-text-primary))' }} className="hover:opacity-90">
                           <Link target="_blank" href={project.links.live} className="flex items-center">
                             <ExternalLink className="w-4 h-4 mr-2" />
                             Live Demo
@@ -132,8 +132,8 @@ export default async function ProjectsPage() {
                   </div>
 
                   <div className={`relative ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-2xl blur-3xl" />
-                    <div className="relative aspect-video rounded-2xl bg-slate-800/30 border border-slate-700/50 backdrop-blur-sm overflow-hidden">
+                    <div className="absolute inset-0 rounded-2xl blur-3xl" style={{ background: 'var(--gradient-primary)', opacity: 0.2 }} />
+                    <div className="relative aspect-video rounded-2xl backdrop-blur-sm overflow-hidden" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
                       <Image
                         src={project?.image_url || "/placeholder.svg?height=400&width=600"}
                         alt={project.title}
@@ -150,11 +150,11 @@ export default async function ProjectsPage() {
 
         {/* Other Projects */}
         {otherProjects.length > 0 &&
-          <section className="py-20 bg-slate-900/30">
+          <section className="py-20" style={{ backgroundColor: 'rgba(var(--color-bg-secondary), 0.3)' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-16">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Other Projects</h2>
-                <p className="text-slate-300">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>Other Projects</h2>
+                <p style={{ color: 'rgb(var(--color-text-secondary))' }}>
                   Additional projects and experiments that showcase different aspects of my development skills.
                 </p>
               </div>
@@ -163,32 +163,33 @@ export default async function ProjectsPage() {
                 {otherProjects.map((project: Project, index: number) => (
                   <Card
                     key={index}
-                    className="group bg-slate-800/30 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/50 transition-all duration-300"
+                    className="group backdrop-blur-sm hover:bg-opacity-50 transition-all duration-300"
+                    style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}
                   >
                     <CardContent className="p-6">
                       <div className="space-y-4">
-                        <CardTitle className="text-xl text-white group-hover:text-violet-400 transition-colors">
+                        <CardTitle className="text-xl transition-colors group-hover:opacity-80" style={{ color: 'rgb(var(--color-text-primary))' }}>
                           {project.title}
                         </CardTitle>
-                        <CardDescription className="text-slate-300 leading-relaxed">
+                        <CardDescription className="leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>
                           {project.description}
                         </CardDescription>
                         <div className="flex flex-wrap gap-2">
                           {project.techStack.map((tech: string) => (
-                            <Badge key={tech} variant="outline" className="text-xs border-slate-700 text-slate-400">
+                            <Badge key={tech} variant="outline" className="text-xs" style={{ border: '1px solid rgb(var(--color-border-primary))', color: 'rgb(var(--color-text-tertiary))' }}>
                               {tech}
                             </Badge>
                           ))}
                         </div>
                         <div className="flex space-x-3 pt-2">
                           {project.links.github && (
-                            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
+                            <Button variant="ghost" size="sm" className="p-0 hover:opacity-80" style={{ color: 'rgb(var(--color-text-tertiary))' }}>
                               <Github className="w-4 h-4 mr-2" />
                               Code
                             </Button>
                           )}
                           {project.links.live && (
-                            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white p-0">
+                            <Button variant="ghost" size="sm" className="p-0 hover:opacity-80" style={{ color: 'rgb(var(--color-text-tertiary))' }}>
                               <ExternalLink className="w-4 h-4 mr-2" />
                               Demo
                             </Button>

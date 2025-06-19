@@ -21,13 +21,13 @@ export default async function BlogPage() {
 
   if (portfolioData.error || !portfolioData.data) {
     return (
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))' }}>
         <NavigationMenu />
         <div className="pt-16">
           <div className="flex items-center justify-center min-h-screen">
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-red-400 mb-4">Error Loading Portfolio</h1>
-              <p className="text-slate-300">{portfolioData.error || "Failed to load portfolio data"}</p>
+              <h1 className="text-2xl font-bold mb-4" style={{ color: 'rgb(239 68 68)' }}>Error Loading Portfolio</h1>
+              <p style={{ color: 'rgb(var(--color-text-secondary))' }}>{portfolioData.error || "Failed to load portfolio data"}</p>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default async function BlogPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))' }}>
       <NavigationMenu />
 
       <div className="pt-16">
@@ -57,8 +57,8 @@ export default async function BlogPage() {
         <section className="py-20 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">Blog & Insights</h1>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>Blog & Insights</h1>
+              <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>
                 Thoughts on web development, programming best practices, and lessons learned from building applications
                 at scale. Join me on this journey of continuous learning.
               </p>
@@ -71,10 +71,10 @@ export default async function BlogPage() {
           <section className="py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-12">
-                <h2 className="text-3xl font-bold text-white mb-4">Featured Article</h2>
+                <h2 className="text-3xl font-bold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>Featured Article</h2>
               </div>
 
-              <Card className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm overflow-hidden">
+              <Card className="backdrop-blur-sm overflow-hidden" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
                 <div className="grid lg:grid-cols-2 gap-0">
                   <div className="relative aspect-video lg:aspect-auto">
                     <Image
@@ -87,14 +87,14 @@ export default async function BlogPage() {
                   <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
                     <div className="space-y-6">
                       <div className="flex items-center space-x-2">
-                        <Badge className="bg-violet-600/20 text-violet-400 border-violet-500/30">Featured</Badge>
+                        <Badge style={{ backgroundColor: 'rgba(var(--color-primary), 0.2)', color: 'rgb(var(--color-primary-light))', border: '1px solid rgba(var(--color-primary), 0.3)' }}>Featured</Badge>
                       </div>
 
                       <div className="space-y-4">
-                        <CardTitle className="text-2xl lg:text-3xl text-white leading-tight">
+                        <CardTitle className="text-2xl lg:text-3xl leading-tight" style={{ color: 'rgb(var(--color-text-primary))' }}>
                           {featuredPost.title}
                         </CardTitle>
-                        <CardDescription className="text-slate-300 text-lg leading-relaxed">
+                        <CardDescription className="text-lg leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>
                           {featuredPost.excerpt}
                         </CardDescription>
                       </div>
@@ -104,7 +104,7 @@ export default async function BlogPage() {
                           <Badge
                             key={tag}
                             variant="secondary"
-                            className="bg-slate-700/50 text-slate-300 border-slate-600/50"
+                            style={{ backgroundColor: 'rgba(var(--color-bg-quaternary), 0.5)', color: 'rgb(var(--color-text-secondary))', border: '1px solid rgba(var(--color-border-secondary), 0.5)' }}
                           >
                             {tag}
                           </Badge>
@@ -112,7 +112,7 @@ export default async function BlogPage() {
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4 text-slate-400">
+                        <div className="flex items-center space-x-4" style={{ color: 'rgb(var(--color-text-tertiary))' }}>
                           <div className="flex items-center space-x-1">
                             <Calendar className="w-4 h-4" />
                             <span className="text-sm">{new Date(featuredPost.publishDate).toLocaleDateString()}</span>
@@ -122,7 +122,7 @@ export default async function BlogPage() {
                             <span className="text-sm">{featuredPost.readTime}</span>
                           </div>
                         </div>
-                        <Button asChild className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+                        <Button asChild style={{ background: 'var(--gradient-secondary)', color: 'rgb(var(--color-text-primary))' }} className="hover:opacity-90">
                           <Link href={`/blog/${featuredPost.url}`} className="flex items-center">
                             Read Article
                             <ArrowRight className="w-4 h-4 ml-2" />
@@ -141,15 +141,16 @@ export default async function BlogPage() {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Latest Articles</h2>
-              <p className="text-slate-300">Dive into my latest thoughts and tutorials on web development.</p>
+              <h2 className="text-3xl font-bold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>Latest Articles</h2>
+              <p style={{ color: 'rgb(var(--color-text-secondary))' }}>Dive into my latest thoughts and tutorials on web development.</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {otherPosts.map((post: BlogPost, index: number) => (
                 <Card
                   key={index}
-                  className="group bg-slate-800/30 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/50 transition-all duration-300 overflow-hidden"
+                  className="group backdrop-blur-sm hover:bg-opacity-50 transition-all duration-300 overflow-hidden"
+                  style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}
                 >
                   <CardHeader className="p-0">
                     <div className="aspect-video relative overflow-hidden">
@@ -163,7 +164,7 @@ export default async function BlogPage() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <div className="flex items-center space-x-4 text-slate-400 text-sm">
+                      <div className="flex items-center space-x-4 text-sm" style={{ color: 'rgb(var(--color-text-tertiary))' }}>
                         <div className="flex items-center space-x-1">
                           <Calendar className="w-3 h-3" />
                           <span>{new Date(post.publishDate).toLocaleDateString()}</span>
@@ -174,21 +175,21 @@ export default async function BlogPage() {
                         </div>
                       </div>
 
-                      <CardTitle className="text-lg text-white line-clamp-2">
+                      <CardTitle className="text-lg line-clamp-2" style={{ color: 'rgb(var(--color-text-primary))' }}>
                         {post.title}
                       </CardTitle>
 
-                      <CardDescription className="text-slate-300 line-clamp-3">{post.excerpt}</CardDescription>
+                      <CardDescription className="line-clamp-3" style={{ color: 'rgb(var(--color-text-secondary))' }}>{post.excerpt}</CardDescription>
 
                       <div className="flex flex-wrap gap-1">
                         {post.tags.map((tag: string) => (
-                          <Badge key={tag} variant="outline" className="text-xs border-slate-700 text-slate-400">
+                          <Badge key={tag} variant="outline" className="text-xs" style={{ border: '1px solid rgb(var(--color-border-primary))', color: 'rgb(var(--color-text-tertiary))' }}>
                             {tag}
                           </Badge>
                         ))}
                       </div>
 
-                      <Button variant="ghost" className="text-violet-400 hover:text-violet-300 p-0 h-auto font-medium">
+                      <Button variant="ghost" className="p-0 h-auto font-medium hover:opacity-80" style={{ color: 'rgb(var(--color-primary-light))' }}>
                         <Link href={`/blog/${post.url}`} className="flex items-center">
                           Read more
                           <ArrowRight className="w-4 h-4 ml-1" />

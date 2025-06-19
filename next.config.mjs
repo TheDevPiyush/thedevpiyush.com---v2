@@ -17,11 +17,6 @@ const nextConfig = {
             }
         ],
     },
-    // Vercel-specific optimizations
-    experimental: {
-        // Enable ISR (Incremental Static Regeneration)
-        isrMemoryCacheSize: 0,
-    },
     // Add headers to prevent aggressive caching
     async headers() {
         return [{

@@ -142,4 +142,36 @@ Available Commands:
       return `Clearing terminal...`
     },
   },
+  {
+    name: "exit",
+    description: "Exit the terminal",
+    aliases: ["quit", "q"],
+    execute: () => {
+      return `Exiting terminal...`
+    },
+  },
+  {
+    name: "admin-signin",
+    description: "Sign in to the admin panel",
+    aliases: ["admin-login", "admin-signin"],
+    execute: () => {
+      return `Signing in...`
+    },
+  },
+  {
+    name: "admin-signout",
+    description: "Sign out of the admin panel",
+    aliases: ["admin-logout", "admin-signout"],
+    execute: () => {
+      return `Signing out...`
+    },
+  },
+  {
+    name: "admin-postblog",
+    description: "Post blogs to the admin panel",
+    aliases: ["admin-post-blog", "admin-postblog"],
+    execute: () => {
+      return `Posting blogs...`
+    },
+  },
 ]

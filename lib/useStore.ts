@@ -13,5 +13,5 @@ export const useUserStore = create<User>((set) => ({
     email: "",
     isAdmin: false,
     setUser: (user) => set(user),
-    clearUser: () => set({})
+    clearUser: () => set({ isAdmin: false, email: "", id: "" })
 }))

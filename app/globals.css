@@ -66,6 +66,10 @@
     animation: blink 1s infinite;
 }
 
+.readonly-editor .ql-toolbar {
+    display: none;
+}
+
 @keyframes blink {
     0%,
     50% {

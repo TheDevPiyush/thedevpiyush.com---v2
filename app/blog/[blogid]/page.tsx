@@ -7,6 +7,7 @@ import { getPortfolioData } from "@/lib/data/portfolio"
 import type { BlogPost } from "@/lib/data/portfolio"
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Editor } from "primereact/editor"
 
 // Force revalidation every 60 seconds (1 minute)
 export const revalidate = 60
@@ -265,8 +266,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                         {/* Content */}
                         <div className="prose prose-invert prose-lg max-w-none" itemProp="articleBody">
-                            <div className="text-slate-300 leading-relaxed space-y-6">
-                                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                            <div className="text-slate-300 leading-relaxed space-y-6 readonly-editor">
+                                <Editor
+                                    readOnly={true}
+                                    value={post.content}
+                                    style={{
+                                        height: 'auto', border: 'none',
+                                        backgroundColor: 'rgb(var(--color-bg-secondary))', color: 'rgb(var(--color-text-primary))',
+                                        borderRadius: '10px',
+                                        padding: '10px'
+                                    }}
+                                />
                             </div>
                         </div>
 

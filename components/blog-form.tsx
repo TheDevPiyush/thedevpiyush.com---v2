@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator"
 import { X, Plus, Save, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import Cookies from 'js-cookie'
+import { Editor } from 'primereact/editor';
 
 const blogFormSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -22,8 +23,8 @@ const blogFormSchema = z.object({
     content: z.string().min(1, "Content is required"),
     read_time: z.string().min(1, "Read time is required"),
     tags: z.array(z.string()).min(1, "At least one tag is required"),
-    url: z.string().url("Please enter a valid URL"),
-    image_url: z.string().url("Please enter a valid image URL"),
+    url: z.string().min(1, "URL is required"),
+    image_url: z.string().min(1, "Image URL is required"),
     is_featured: z.boolean(),
     is_trending: z.boolean(),
     is_popular: z.boolean(),
@@ -35,7 +36,6 @@ type BlogFormData = z.infer<typeof blogFormSchema>
 export function BlogForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [newTag, setNewTag] = useState("")
-
     const {
         register,
         handleSubmit,
@@ -182,17 +182,10 @@ export function BlogForm() {
                             <Label htmlFor="content" style={{ color: 'rgb(var(--color-text-primary))' }}>
                                 Content *
                             </Label>
-                            <Textarea
-                                id="content"
-                                placeholder="Write your blog post content here..."
-                                className="min-h-[200px]"
-                                style={{
-                                    backgroundColor: 'rgb(var(--color-bg-tertiary))',
-                                    borderColor: 'rgb(var(--color-border-primary))',
-                                    color: 'rgb(var(--color-text-primary))'
-                                }}
-                                {...register("content")}
-                            />
+                            <div className="card text-white">
+                                <Editor value={watch("content")} onTextChange={(e) => setValue("content", e.htmlValue || "")} style={{ height: '320px' }} />
+                            </div>
+
                             {errors.content && (
                                 <p className="text-sm" style={{ color: 'rgb(239 68 68)' }}>
                                     {errors.content.message}

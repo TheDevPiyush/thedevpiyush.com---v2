@@ -7,9 +7,9 @@ import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/comp
 import { ArrowLeft, Mail, Shield, Terminal, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { supabase } from "@/lib/supabase/client"
-import { useRouter } from "@bprogress/next/app"
 import Cookies from 'js-cookie'
-import { useUserStore } from "@/lib/useStore"
+import { useRouter } from '@bprogress/next/app';
+import useUser from "@/hooks/use-user"
 
 export default function AdminSignInPage() {
     const [email, setEmail] = useState("")
@@ -17,8 +17,9 @@ export default function AdminSignInPage() {
     const [showOTP, setShowOTP] = useState(false)
     const [isSendingOTP, setIsSendingOTP] = useState(false)
     const [isVerifyingOTP, setIsVerifyingOTP] = useState(false)
+    const { getOrRegisterUser } = useUser();
     const router = useRouter();
-    const setUser = useUserStore.getState().setUser
+
     const handleSendOTP = async () => {
         setIsSendingOTP(true)
         const { data, error } = await supabase.auth.signInWithOtp({ email: email })
@@ -52,44 +53,9 @@ export default function AdminSignInPage() {
             toast.success("OTP verified successfully!")
             Cookies.set("token", data?.session?.access_token || "", { expires: 1 })
             getOrRegisterUser(email, data?.user?.id as string);
+            router.push("/");
         }
         setIsVerifyingOTP(false)
-    }
-
-    const getOrRegisterUser = async (email: string, id: string) => {
-        const response = await fetch("/api/get-user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: id })
-        })
-
-        if (response.ok) {
-            const data = await response.json()
-            setUser(data?.data[0]);
-            router.push("/blog");
-            toast.success("User found")
-        }
-
-        else {
-            const response = await fetch("/api/register-user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email: email, id: id })
-            })
-            if (response.ok) {
-                const data = await response.json()
-                setUser(data?.data[0]);
-                // router.push("/admin/postblogs");
-                router.push("/blog");
-                toast.success("User registered successfully")
-            } else {
-                toast.error("Failed to register user")
-            }
-        }
     }
     const handleBackToEmail = () => {
         setShowOTP(false)

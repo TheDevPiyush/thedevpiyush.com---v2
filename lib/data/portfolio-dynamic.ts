@@ -4,10 +4,10 @@ import type { PortfolioData } from "../supabase/types"
 export async function getPortfolioDataCached(): Promise<PortfolioData | null> {
   // Add cache control to prevent aggressive caching
   const data = await getPortfolioDataFromSupabase()
-  
+
   // Force fresh data by adding a small delay (helps with Vercel caching)
   await new Promise(resolve => setTimeout(resolve, 100))
-  
+
   return data
 }
 
@@ -22,6 +22,7 @@ export function transformPortfolioData(data: PortfolioData) {
       phone: data.personal.phone,
       working_at: data.personal.working_at,
       bio: data.personal.bio,
+      about_me: data.personal.about_me,
       philosophy: data.personal.philosophy,
       image: data.personal.image,
       interests: data.interests.map((interest) =>

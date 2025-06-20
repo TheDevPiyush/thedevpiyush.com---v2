@@ -5,6 +5,10 @@ import type React from "react"
 import { useState, useEffect, useRef, useCallback } from "react"
 import { commands } from "@/lib/commands"
 import { useRouter } from "next/navigation"
+import Cookies from 'js-cookie'
+import { supabase } from "@/lib/supabase/client"
+import { toast } from "sonner"
+import { useUserStore } from "@/lib/useStore"
 
 interface TerminalLine {
   type: "input" | "output" | "error"
@@ -21,6 +25,7 @@ export function Terminal() {
   const inputRef = useRef<HTMLInputElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
   const router = useRouter();
+  const { clearUser } = useUserStore();
   // Auto-focus input and show welcome message
   useEffect(() => {
     if (inputRef.current) {
@@ -99,6 +104,38 @@ export function Terminal() {
         if (command.name === "open-ui" || command.aliases?.includes("ui")) {
           if (typeof window !== "undefined") {
             router.push("/");
+            return
+          }
+        }
+
+        if (command.name === "exit" || command.aliases?.includes("quit")) {
+          if (typeof window !== "undefined") {
+            router.push("/");
+            return
+          }
+        }
+
+        if (command.name === "admin-signin" || command.aliases?.includes("admin-login")) {
+          if (typeof window !== "undefined") {
+            router.push("/admin/signin");
+            return
+          }
+        }
+
+        if (command.name === "admin-signout" || command.aliases?.includes("admin-logout")) {
+          if (typeof window !== "undefined") {
+            Cookies.remove("token");
+            await supabase.auth.signOut();
+            clearUser();
+            toast.success("Signed out successfully")
+            router.push("/");
+            return
+          }
+        }
+
+        if (command.name === "admin-postblog" || command.aliases?.includes("admin-post-blog")) {
+          if (typeof window !== "undefined") {
+            router.push("/admin/postblog");
             return
           }
         }

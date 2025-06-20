@@ -66,6 +66,10 @@
     animation: blink 1s infinite;
 }
 
+.readonly-editor .ql-toolbar {
+    display: none;
+}
+
 @keyframes blink {
     0%,
     50% {
@@ -95,21 +99,6 @@
 
 .terminal-scroll::-webkit-scrollbar-thumb:hover {
     background: #16a34a;
-}
-
-
-/* Selection color */
-
-::selection {
-    background: #22c55e;
-    color: #000;
-}
-
-
-/* Input focus styles */
-
-input:focus {
-    outline: none;
 }
 
 

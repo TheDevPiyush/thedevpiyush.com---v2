@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import Providers from "@/lib/providers/provider"
 
 // Initialize the JetBrains Mono font
 const jetbrainsMono = JetBrains_Mono({
@@ -96,7 +97,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="bg-black text-green-400 font-mono antialiased">
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )
